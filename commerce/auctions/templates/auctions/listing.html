@@ -1,0 +1,61 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% block body %}
+<div class="container">
+<div class="row">
+   <div class="listing-box">
+      <div class="row">
+         <div class="col-md-6">
+            {% if listing.image_url %}
+            <img src="{{ listing.image_url }}" alt="listing_image" class="img-fluid ">
+            {% else %}
+            <img src="{% static 'auctions/images/No-Image-Placeholder.svg' %}" alt="listing_image" class="img-fluid ">
+            {% endif %}
+         </div>
+         <div class="col-md-6">
+            <h3>{{ listing.title }}</h3>
+            <h6 style="border-bottom: solid black">Details</h6>
+            <p>Listed by: {{ listing.creator }}</p>
+            <p>Start bid: ${{ listing.starting_bid }}</p>
+            <p>Description: {{ listing.description }}</p>
+            <p>Category: {{ listing.category}}</p>
+            <p>Current Bid {{ listing.current_bid}}</p>
+            {% if listing.active == False %}
+            <p>Closed!</p>
+            {% endif %}
+            {% if listing.creator != request.user %}
+            <form action="{% url 'bid' %}" method="post">
+               {% csrf_token %}
+               <input type="hidden" name="listing_id" value="{{ listing.id }}">
+               <input type="number" name="bid"  placeholder="Your Bid">
+               <button type="submit">Place Bid</button>
+            </form>
+            {% endif %}
+            {% if listing.creator == user and listing.active %}
+            <form action="{% url 'close'%}" method="post">
+               {% csrf_token %}
+               <input type="hidden" name="listing_id" value="{{ listing.id }}">
+               <input type="submit" value="Close Auction" onclick="return confirm('Are you sure?')">
+            </form>
+            {% endif %}
+            <div class="form-group">
+               <form method="post" action="{% url 'watchlist'%}">
+                  {% csrf_token %}
+                  <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                  {% if listing in request.user.watchlist.all %}
+                  <button type="submit" name="action" value="remove">Remove from Watchlist</button>
+                  {% else %}
+                  <button type="submit" name="action" value="add">Add to Watchlist</button>
+                  {% endif %}
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% if message %}
+<div class="alert alert-info" role="alert">
+{{ message }}
+{% endif %}
+</ul>
+{% endblock %}

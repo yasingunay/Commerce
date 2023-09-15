@@ -1,0 +1,7 @@
+# How to delete a user
+python manage.py shell
+from auctions.models import User
+all_users = User.objects.all()
+user_to_delete = User.objects.get(username='username_here')
+user_to_delete.delete()
+

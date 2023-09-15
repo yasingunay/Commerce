@@ -1,0 +1,19 @@
+body {
+    padding: 10px;
+}
+
+.listing-box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* Custom CSS */
+.max-width {
+    max-width: 100%; /* Set the maximum width to 100% */
+    height: auto; /* Allow the height to adjust automatically */
+}
+
+
