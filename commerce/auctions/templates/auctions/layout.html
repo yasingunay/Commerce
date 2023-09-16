@@ -27,7 +27,9 @@
                <li class="nav-item">
                   <a class="nav-link" href="{% url 'create' %}">Create Listing</a>
                </li>
+
                {% if user.is_authenticated %}
+              
                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ user.username }}
@@ -50,13 +52,13 @@
             </ul>
          </div>
       </nav>
-      <div>
+      <!-- <div>
          {% if user.is_authenticated %}
          Signed in as <strong>{{ user.username }}</strong>.
          {% else %}
          Not signed in.
          {% endif %}
-      </div>
+      </div> -->
       {% block body %}
       {% endblock %}
    </body>

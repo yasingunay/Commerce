@@ -1,53 +1,55 @@
 {% extends "auctions/layout.html" %}
 {% load static %}
 {% block body %}
-<!-- Headline -->
-<div class="container mx-5 my-2">
-   <div class="mx-5">
-      <h3>{{ headline }}</h3>
-   </div>
-</div>
-{% if message %}
-<div class="alert alert-danger" role="alert">
-   {{ message }}
-</div>
-{% endif %}
-{% if not listings %}
-<div class="alert alert-danger" role="alert">
-   No listings found.
-</div>
-{% endif %}
-<div class="container">
-   <div class="row">
-      {% for listing in listings %}
-      <div class="col-md-4 mb-4">
-         <div class="listing-box">
-            <div class="row">
-               <div class="col-md-6">
-                <a href="{% url 'listing' listing.id %}">
-                  {% if listing.image_url %}
-                  <img src="{{ listing.image_url }}" alt="listing_image" class="img-fluid ">
-                  {% else %}
-                  <img src="{% static 'auctions/images/No-Image-Placeholder.svg' %}" alt="listing_image" class="img-fluid ">
-                  {% endif %}
-                </a>
-               </div>
-               <div class="col-md-6">
-                  <div>
-                     <a href="{% url 'listing' listing.id %}">
-                        <h3>{{ listing.title }}</h3>
-                     </a>
-                  </div>
-                  <p>Created by {{ listing.creator}}</p>
-                  <p>Start bid: ${{ listing.starting_bid }}</p>
-                  <p>Current bid: ${{ listing.current_bid }}</p>
-                  <p>Description: {{ listing.description }}</p>
-                  <p>Category: {{ listing.category }}</p>
-               </div>
+    <!-- Headline -->
+    <h3 class="text-center mt-4 mb-4">{{ headline }}</h3>
+
+    {% if message %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+    {% if not listings %}
+    <div class="alert alert-danger" role="alert">
+        No listings found.
+    </div>
+    {% endif %}
+
+    <div class="container">
+        <div class="row">
+            {% for listing in listings %}
+            <div class="col-md-3">
+                <div class="card mb-4 box-shadow">
+                    <!-- Album Image -->
+                        <a href="{% url 'listing' listing.id %}">
+                            <div class="listing-image-container">
+                                {% if listing.image_url %}
+                                <img class="listing-image img-fluid" src="{{ listing.image_url }}" alt="{{ listing.title }}">
+                                {% else %}
+                                <img class="listing-image img-fluid" src="{% static 'auctions/images/No-Image-Placeholder.svg' %}" alt="{{ listing.title }}">
+                                {% endif %}
+                            </div>
+                        </a>
+
+                    <div class="card-body">
+                        <!-- Album Title -->
+                        <h5 class="card-title">{{ listing.title }}</h5>
+                        <p class="card-text"><strong>Created by:</strong> {{ listing.creator}}</p>
+                        <p class="card-text"><strong>Start bid:</strong> ${{ listing.starting_bid }}</p>
+                        <p class="card-text"><strong>Current bid:</strong> ${{ listing.current_bid }}</p>
+                        <p class="card-text"><strong>Category:</strong> {{ listing.category }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <!-- View Details Button -->
+                                <a href="{% url 'listing' listing.id %}">
+                                    <button type="button" class="btn btn-sm btn-primary">View Details</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-      {% endfor %}
-   </div>
-</div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

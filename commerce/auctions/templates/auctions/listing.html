@@ -2,82 +2,101 @@
 {% load static %}
 {% block body %}
 <div class="container">
-<div class="row">
-   <div class="listing-box">
-      <div class="row">
-         <div class="col-md-6">
-            {% if listing.image_url %}
-            <img src="{{ listing.image_url }}" alt="listing_image" class="img-fluid ">
-            {% else %}
-            <img src="{% static 'auctions/images/No-Image-Placeholder.svg' %}" alt="listing_image" class="img-fluid ">
-            {% endif %}
-         </div>
-         <div class="col-md-6">
-            <h3>{{ listing.title }}</h3>
-            <h6 style="border-bottom: solid black">Details</h6>
-            <p>Listed by: {{ listing.creator }}</p>
-            <p>Start bid: ${{ listing.starting_bid }}</p>
-            <p>Description: {{ listing.description }}</p>
-            <p>Category: {{ listing.category}}</p>
-            <p>Current Bid {{ listing.current_bid}}</p>
-            {% if listing.active == False %}
-            <p>Closed!</p>
-            {% endif %}
-            {% if listing.winner == request.user and listing.active == False %}
-            <p>You won this listing!</p>
-            {% endif %}
-            {% if listing.creator != request.user and listing.active == True %}
-            <form action="{% url 'bid' %}" method="post">
-               {% csrf_token %}
-               <input type="hidden" name="listing_id" value="{{ listing.id }}">
-               <input type="number" name="bid"  placeholder="Your Bid">
-               <button type="submit">Place Bid</button>
-            </form>
-            {% endif %}
-            {% if listing.creator == user and listing.active %}
-            <form action="{% url 'close'%}" method="post">
-               {% csrf_token %}
-               <input type="hidden" name="listing_id" value="{{ listing.id }}">
-               <input type="submit" value="Close Auction" onclick="return confirm('Are you sure?')">
-            </form>
-            {% endif %}
-            <div class="form-group">
-               <form method="post" action="{% url 'watchlist'%}">
-                  {% csrf_token %}
-                  <input type="hidden" name="listing_id" value="{{ listing.id }}">
-                  {% if listing in request.user.watchlist.all %}
-                  <button type="submit" name="action" value="remove">Remove from Watchlist</button>
-                  {% else %}
-                  <button type="submit" name="action" value="add">Add to Watchlist</button>
-                  {% endif %}
-               </form>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    {% if listing.image_url %}
+                    <img src="{{ listing.image_url }}" alt="listing-image" class="listing-image">
+                    {% else %}
+                    <img src="{% static 'auctions/images/No-Image-Placeholder.svg' %}" alt="listing-image" class="listing-image">
+                    {% endif %}
+                </div>
+                <div class="col-md-12">
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
-        <form action="{% url 'comment' %}" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="listing_id" value="{{ listing.id }}">
-        <textarea name="comment" placeholder="Your comment" style="width: 300px; height: 150px"></textarea><br>
-        <button type="submit">Add Comment</button>
-        </form>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="details-box">
+                        <h3>{{ listing.title }}</h3>
+                        <div class="details-heading">
+                            <h6>Details</h6>
+                        </div>
+                        <div class="details-info">
+                            <p><strong>Listed by:</strong> {{ listing.creator }}</p>
+                            <p><strong>Description:</strong> {{ listing.description }}</p>
+                            <p><strong>Category:</strong> {{ listing.category }}</p>
+                            <p><strong>Start bid:</strong> ${{ listing.starting_bid }}</p>
+                            <p><strong>Current Bid:</strong> ${{ listing.current_bid }}</p>
+                            {% if not listing.active %}
+                            <p>Closed!</p>
+                            {% endif %}
+                            {% if listing.winner == request.user and not listing.active %}
+                            <p><strong>You won this listing!</strong></p>
+                            {% endif %}
+                            {% if listing.creator != request.user and listing.active %}
+                            <form action="{% url 'bid' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                                <input type="number" name="bid" placeholder="Your Bid" class="form-control"><br>
+                                <button type="submit" class="btn btn-primary">Place Bid</button>
+                            </form>
+                            {% endif %}
+                            {% if listing.creator == user and listing.active %}
+                            <form action="{% url 'close' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                                <input type="submit" value="Close Auction" onclick="return confirm('Are you sure?')" class="btn btn-danger">
+                            </form>
+                            {% endif %}
+                            <div class="form-group">
+                                <form method="post" action="{% url 'watchlist' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                                    {% if listing in request.user.watchlist.all %}
+                                    <button type="submit" name="action" value="remove" class="btn btn-warning">Remove from Watchlist</button>
+                                    {% else %}
+                                    <button type="submit" name="action" value="add" class="btn btn-success">Add to Watchlist</button>
+                                    {% endif %}
+                                </form>
+                            </div>
+                            {% if message %}
+                            <div class="alert alert-info" role="alert">
+                                {{ message }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6">
-        <h6>Comments</h6>
-        {% for comment in comments %}
-        <h6>{{ comment.user }}</h6>
-        <p>{{ comment.timestamp }}</p>
-        <p>{{ comment.comment }}</p>
-        <hr>
-        {%endfor%}
+</div>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h6>Comments</h6>
+            {% for comment in comments %}
+            <div class="comment">
+                <h6>{{ comment.user }}</h6>
+                <p>{{ comment.timestamp }}</p>
+                <p>{{ comment.comment }}</p>
+                <hr>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-6">
+            <form action="{% url 'comment' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                <textarea name="comment" placeholder="Your comment" style="width: 100%; height: 150px" class="form-control"></textarea><br>
+                <button type="submit" class="btn btn-primary">Add Comment</button>
+            </form>
+        </div>
     </div>
 </div>
-{% if message %}
-<div class="alert alert-info" role="alert">
-{{ message }}
-{% endif %}
-</ul>
+
 {% endblock %}

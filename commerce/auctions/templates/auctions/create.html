@@ -1,39 +1,72 @@
 {% extends "auctions/layout.html" %}
 {% block body %}
-<h1>Create Listing</h1>
-<form method="post" action="{% url 'create' %}">
-   {% csrf_token %}
-   <p class="required-note">Fields marked with <span class="required">*</span> are required.</p>
-   <div class="form-group">
-      {{ form.title }}
-   </div>
-   <div class="form-group">
-      {{ form.description }}
-   </div>
-   <div class="form-group">
-      {{ form.starting_bid }}
-   </div>
-   <div class="form-group">  
-      {{ form.image_url }}
-   </div>
-   <div class="form-group">
-      {{ form.category }}
-   </div>
-   <button type="submit" class="btn btn-primary">Create Listing</button>
-</form>
-<div class="form-group">
-   {% if form.errors %}
-   <h6>Please correct the errors below and resubmit.</h6>
-   {% endif %}
-   <ul class="errorlist">
-      {% for error in form.non_field_errors %}
-      <li>{{ error }}</li>
-      {% endfor %}
-      {% for field in form %}
-      {% for error in field.errors %}
-      <li>{{ field.label_tag }}: {{ error }}</li>
-      {% endfor %}
-      {% endfor %}
-   </ul>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="background-container">
+            <h3 class="text-center">Create Listing</h3>
+            <form method="post" action="{% url 'create' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.title.id_for_label }}" class="required">Title:</label>
+                    {{ form.title }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.description.id_for_label }}" class="required">Description:</label>
+                    {{ form.description }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.starting_bid.id_for_label }}" class="required">Starting Bid:</label>
+                    {{ form.starting_bid }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.image_url.id_for_label }}" class="required">Image:</label>
+                    {{ form.image_url }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.category.id_for_label }}" class="required">Category:</label>
+                    {{ form.category }}
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create Listing</button>
+            </form>
+            <div class="form-group mt-3">
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    <h6>Please correct the errors below and resubmit.</h6>
+                </div>
+                {% endif %}
+                <ul class="errorlist">
+                    {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                    {% for field in form %}
+                    {% for error in field.errors %}
+                    <li>{{ field.label_tag }}: {{ error }}</li>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
 </div>
+<style>
+    /* Additional CSS styles for alignment and modern look */
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    label {
+        font-weight: bold;
+        display: block;
+    }
+    
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+</style>
 {% endblock %}
