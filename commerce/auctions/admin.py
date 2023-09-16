@@ -8,9 +8,17 @@ class ListingAdmin(admin.ModelAdmin):
 class BidAdmin(admin.ModelAdmin):
     list_display = ("user", "listing", "amount", "timestamp")
 
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+
+
+class UserAdmin(admin.ModelAdmin):
+    list_display = ("username", "email")
+
+
 
 # Register your models here.
-admin.site.register(User)
+admin.site.register(User, UserAdmin)
 admin.site.register(Listing, ListingAdmin)
-admin.site.register(Category)
-admin.site.register(Bid)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Bid, BidAdmin)

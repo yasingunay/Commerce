@@ -172,6 +172,7 @@ def bid(request):
         listing = Listing.objects.get(pk=listing_id)
         if float(bid) > listing.current_bid:
             listing.current_bid = float(bid)
+            listing.winner = request.user
             listing.save()
             request.user.bids.add(listing)
             request.user.save()
@@ -210,3 +211,25 @@ def close(request):
         })
     else:
         return HttpResponseRedirect(reverse("index"))
+    
+
+
+def category(request, category_name):
+    category = Category.objects.get(name=category_name)
+    return render(request, "auctions/index.html", {
+        "listings": Listing.objects.filter(category=category),
+        "headline": category_name
+    })
+
+
+def categories(request):
+    return render(request, "auctions/categories.html", {
+        "categories": Category.objects.all()
+    })
+
+
+
+def comment(request):
+    pass
+
+       

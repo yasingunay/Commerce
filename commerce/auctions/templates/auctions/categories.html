@@ -1,0 +1,23 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% block body %}
+<div class="container mx-5 my-2">
+    <div class="mx-5">
+        <h3>Categories</h3>
+    </div>
+ </div>
+<div class="container">
+   <div class="row">
+      <div class="col-md-4">
+         <ul>
+            {% for category in categories %}
+            <li><a href="{% url 'category' category %}">{{ category }}</a></li>
+            {% endfor %}
+         </ul>
+      </div>
+      
+    </div>
+</div>
+
+
+{% endblock %}

@@ -23,7 +23,10 @@
             {% if listing.active == False %}
             <p>Closed!</p>
             {% endif %}
-            {% if listing.creator != request.user %}
+            {% if listing.winner == request.user and listing.active == False %}
+            <p>You won this listing!</p>
+            {% endif %}
+            {% if listing.creator != request.user and listing.active == True %}
             <form action="{% url 'bid' %}" method="post">
                {% csrf_token %}
                <input type="hidden" name="listing_id" value="{{ listing.id }}">

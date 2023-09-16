@@ -29,6 +29,7 @@ class Listing(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
+    winner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="winner")
 
     def __str__(self):
         return self.title
@@ -42,3 +43,13 @@ class Bid(models.Model):
 
     def __str__(self):
         return f"{self.user} bid ${self.amount} on {self.listing}"
+    
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    comment = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user} commented on {self.listing}"

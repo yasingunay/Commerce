@@ -24,11 +24,13 @@
          <div class="listing-box">
             <div class="row">
                <div class="col-md-6">
+                <a href="{% url 'listing' listing.id %}">
                   {% if listing.image_url %}
                   <img src="{{ listing.image_url }}" alt="listing_image" class="img-fluid ">
                   {% else %}
                   <img src="{% static 'auctions/images/No-Image-Placeholder.svg' %}" alt="listing_image" class="img-fluid ">
                   {% endif %}
+                </a>
                </div>
                <div class="col-md-6">
                   <div>
