@@ -20,13 +20,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="details-box">
-                        <h3>{{ listing.title }}</h3>
-                        <div class="details-heading">
-                            <h6>Details</h6>
-                        </div>
+                        <h1>{{ listing.title }}</h1><br>
                         <div class="details-info">
                             <p><strong>Listed by:</strong> {{ listing.creator }}</p>
-                            <p><strong>Description:</strong> {{ listing.description }}</p>
+                            <div class="description-container">
+                                <p><strong>Description:</strong> {{ listing.description }}</p>
+                            </div>
+                          
                             <p><strong>Category:</strong> {{ listing.category }}</p>
                             <p><strong>Start bid:</strong> ${{ listing.starting_bid }}</p>
                             <p><strong>Current Bid:</strong> ${{ listing.current_bid }}</p>
@@ -78,7 +78,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <h6>Comments</h6>
+            <h4>Comments</h4>
             {% for comment in comments %}
             <div class="comment">
                 <h6>{{ comment.user }}</h6>

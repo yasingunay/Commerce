@@ -12,7 +12,7 @@ from .models import User, Listing, Category, Bid, Comment
 
 class CreateForm(forms.Form):
     title = forms.CharField(widget=TextInput(attrs={'placeholder': 'Title', 'autofocus': True}))
-    description = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Description'}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Description', 'rows':'5'}))
     starting_bid = forms.DecimalField(widget=TextInput(attrs={'placeholder': 'Starting Bid', 'autocomplete' : 'off'}), min_value=0, max_digits=10, decimal_places=2)
     image_url = forms.URLField(widget=TextInput(attrs={'placeholder': 'Image URL', 'autocomplete' : 'off'}), required=False)
     category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label="Select Category")

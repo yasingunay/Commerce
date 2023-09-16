@@ -7,7 +7,7 @@
             <h3 class="text-center">Create Listing</h3>
             <form method="post" action="{% url 'create' %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="form-group">
+                <div class="form-group" >
                     <label for="{{ form.title.id_for_label }}" class="required">Title:</label>
                     {{ form.title }}
                 </div>
@@ -51,7 +51,7 @@
     </div>
 </div>
 <style>
-    /* Additional CSS styles for alignment and modern look */
+   
     .form-group {
         margin-bottom: 20px;
     }
@@ -61,12 +61,13 @@
         display: block;
     }
     
-    textarea {
+    textarea, input[type="text"] {
         width: 100%;
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
         resize: vertical;
+        
     }
 </style>
 {% endblock %}
