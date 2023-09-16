@@ -56,6 +56,25 @@
       </div>
    </div>
 </div>
+<div class="row">
+    <div class="col-md-6">
+        <form action="{% url 'comment' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="listing_id" value="{{ listing.id }}">
+        <textarea name="comment" placeholder="Your comment" style="width: 300px; height: 150px"></textarea><br>
+        <button type="submit">Add Comment</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h6>Comments</h6>
+        {% for comment in comments %}
+        <h6>{{ comment.user }}</h6>
+        <p>{{ comment.timestamp }}</p>
+        <p>{{ comment.comment }}</p>
+        <hr>
+        {%endfor%}
+    </div>
+</div>
 {% if message %}
 <div class="alert alert-info" role="alert">
 {{ message }}
