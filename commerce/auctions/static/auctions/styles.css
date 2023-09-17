@@ -12,22 +12,9 @@ body {
 
 
 .max-width {
-    max-width: 100%; /* Set the maximum width to 100% */
-    height: auto; /* Allow the height to adjust automatically */
+    max-width: 100%;
+    height: auto; 
 }
-
-
-
-
-
-.listing-image {
-    width: 100%; /* Set the width to 100% to make the image fit the container */
-    height: auto; /* Auto height to maintain the aspect ratio */
-    max-height: 400px; /* Set a maximum height to limit the image height if needed */
-}
-
-
-
 
 
 .container {
@@ -82,18 +69,31 @@ button[type="submit"]:hover {
 
 
 .listing-image-container {
-    position: relative;
-    width: 100%;
-    max-height: 300px; /* Adjust the maximum height as needed */
-    overflow: hidden;
-}
+    max-width: 450px; 
+    max-height: 300px;
+    position: relative;   
+    height: 300px;
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
 
 .listing-image {
-    object-fit: cover;
     width: 100%;
-    height: 100%;
-    max-width: 400px;
-}
+    height: auto
+  
+
+ }
+   
+
+ #listing-details1{
+    margin-top: 10px;
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 450px;
+ }
+
 
 
 
@@ -173,4 +173,18 @@ button[type="submit"]:hover {
 .description-container {
     max-height: 200px; /* Adjust the height as needed */
     overflow-y: auto;
+}
+
+
+
+
+.card {
+    height: 100%; 
+
+  
+ }
+
+
+ #listing-box1 {
+    margin-bottom: 10px;
 }

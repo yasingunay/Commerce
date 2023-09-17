@@ -17,5 +17,5 @@ urlpatterns = [
     path("listing/all", views.all, name="all"),
     path("category/<str:category_name>", views.category, name="category"),
     path("categories", views.categories, name="categories"),
-    path("comment", views.comment, name="comment")
+    path("comment", views.comment, name="comment"),
 ]

@@ -10,35 +10,52 @@ from django.contrib import messages
 
 from .models import User, Listing, Category, Bid, Comment
 
+
 class CreateForm(forms.Form):
-    title = forms.CharField(widget=TextInput(attrs={'placeholder': 'Title', 'autofocus': True}))
-    description = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Description', 'rows':'5'}))
-    starting_bid = forms.DecimalField(widget=TextInput(attrs={'placeholder': 'Starting Bid', 'autocomplete' : 'off'}), min_value=0, max_digits=10, decimal_places=2)
-    image_url = forms.URLField(widget=TextInput(attrs={'placeholder': 'Image URL', 'autocomplete' : 'off'}), required=False)
-    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label="Select Category")
-  
-    
+    title = forms.CharField(
+        widget=TextInput(attrs={"placeholder": "Title", "autofocus": True})
+    )
+    description = forms.CharField(
+        widget=forms.Textarea(attrs={"placeholder": "Description", "rows": "5"})
+    )
+    starting_bid = forms.DecimalField(
+        widget=TextInput(attrs={"placeholder": "Starting Bid", "autocomplete": "off"}),
+        min_value=0,
+        max_digits=10,
+        decimal_places=2,
+    )
+    image_url = forms.URLField(
+        widget=TextInput(attrs={"placeholder": "Image URL", "autocomplete": "off"}),
+        required=False,
+    )
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(), empty_label="Select Category"
+    )
+
 
 # Active listings
 def index(request):
-    return render(request, "auctions/index.html", {
-        "listings": Listing.objects.filter(active=True),
-        "headline": "Active Listings"
-    })
+    return render(
+        request,
+        "auctions/index.html",
+        {
+            "listings": Listing.objects.filter(active=True),
+            "headline": "Active Listings",
+        },
+    )
 
 
 # Active and closed listings
 def all(request):
-    return render(request, "auctions/index.html", {
-        "listings": Listing.objects.all(),
-        "headline": "All Listings"
-    })
-
+    return render(
+        request,
+        "auctions/index.html",
+        {"listings": Listing.objects.all(), "headline": "All Listings"},
+    )
 
 
 def login_view(request):
     if request.method == "POST":
-
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
@@ -49,9 +66,11 @@ def login_view(request):
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
         else:
-            return render(request, "auctions/login.html", {
-                "message": "Invalid username and/or password."
-            })
+            return render(
+                request,
+                "auctions/login.html",
+                {"message": "Invalid username and/or password."},
+            )
     else:
         return render(request, "auctions/login.html")
 
@@ -70,24 +89,27 @@ def register(request):
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
         if password != confirmation:
-            return render(request, "auctions/register.html", {
-                "message": "Passwords must match."
-            })
+            return render(
+                request, "auctions/register.html", {"message": "Passwords must match."}
+            )
 
         # Attempt to create new user
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
         except IntegrityError:
-            return render(request, "auctions/register.html", {
-                "message": "Username already taken."
-            })
+            return render(
+                request,
+                "auctions/register.html",
+                {"message": "Username already taken."},
+            )
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
 
-@login_required(login_url='/login')
+
+@login_required(login_url="/login")
 def create(request):
     if request.method == "POST":
         form = CreateForm(request.POST)
@@ -98,35 +120,42 @@ def create(request):
             image_url = form.cleaned_data["image_url"]
             category = form.cleaned_data["category"]
             creator = request.user
-            listing = Listing(title=title, description=description, starting_bid=starting_bid, current_bid=starting_bid, image_url=image_url, category=category, creator=creator)
+            listing = Listing(
+                title=title,
+                description=description,
+                starting_bid=starting_bid,
+                current_bid=starting_bid,
+                image_url=image_url,
+                category=category,
+                creator=creator,
+            )
             listing.save()
-            return HttpResponseRedirect(reverse("index")) 
+            return HttpResponseRedirect(reverse("index"))
         else:
-            return render(request, "auctions/create.html", {
-                "form": form
-            })
+            return render(request, "auctions/create.html", {"form": form})
     else:
         form = CreateForm()
-        return render(request, "auctions/create.html", {
-            "form": form
-        })
+        return render(request, "auctions/create.html", {"form": form})
 
 
 def my_listings(request):
-    return render(request, "auctions/index.html", {
-        "listings": Listing.objects.filter(creator=request.user),
-        "headline": "My Listings"
-    })
+    return render(
+        request,
+        "auctions/index.html",
+        {
+            "listings": Listing.objects.filter(creator=request.user),
+            "headline": "My Listings",
+        },
+    )
 
 
 def listing(request, listing_id):
     listing = Listing.objects.get(pk=listing_id)
     comments = Comment.objects.filter(listing=listing)
-    return render(request, "auctions/listing.html", {
-        "listing": listing,
-        "comments": comments
-    })
-    
+    return render(
+        request, "auctions/listing.html", {"listing": listing, "comments": comments}
+    )
+
 
 def watchlist(request):
     if request.method == "POST":
@@ -146,27 +175,22 @@ def watchlist(request):
             message = "Removed from watchlist"
         else:
             message = "Error"
-        return render(request, "auctions/listing.html", {
-        "listing": listing,
-        "message": message
-    })
+        return render(
+            request, "auctions/listing.html", {"listing": listing, "message": message}
+        )
     else:
         try:
             listings = request.user.watchlist.all()
         except:
             listings = []
-        return render(request, "auctions/index.html", {
-            "listings": listings,
-            "headline": "My Watchlist"
-        })
-    
+        return render(
+            request,
+            "auctions/index.html",
+            {"listings": listings, "headline": "My Watchlist"},
+        )
 
 
-
-
-
-
-@login_required(login_url='/login')
+@login_required(login_url="/login")
 def bid(request):
     if request.method == "POST":
         listing_id = request.POST.get("listing_id")
@@ -180,25 +204,26 @@ def bid(request):
             request.user.save()
             bid = Bid(user=request.user, listing=listing, amount=bid)
             bid.save()
-            return render(request, "auctions/listing.html", {
-                "listing": listing,
-                "message": "Bid placed"
-            })
+            return render(
+                request,
+                "auctions/listing.html",
+                {"listing": listing, "message": "Bid placed"},
+            )
         else:
-            return render(request, "auctions/listing.html", {
-                "listing": listing,
-                "message": "Bid must be higher than current bid"
-            })
+            return render(
+                request,
+                "auctions/listing.html",
+                {"listing": listing, "message": "Bid must be higher than current bid"},
+            )
     else:
         return HttpResponseRedirect(reverse("index"))
 
 
 def my_bids(request):
     bids = request.user.bids.all()
-    return render(request, "auctions/index.html", {
-        "listings": bids,
-        "headline": "My Bids"
-    })
+    return render(
+        request, "auctions/index.html", {"listings": bids, "headline": "My Bids"}
+    )
 
 
 def close(request):
@@ -207,30 +232,34 @@ def close(request):
         listing = Listing.objects.get(pk=listing_id)
         listing.active = False
         listing.save()
-        return render(request, "auctions/listing.html", {
-            "listing": listing,
-            "message": "Listing closed"
-        })
+        return render(
+            request,
+            "auctions/listing.html",
+            {"listing": listing, "message": "Listing closed"},
+        )
     else:
         return HttpResponseRedirect(reverse("index"))
-    
 
 
 def category(request, category_name):
     category = Category.objects.get(name=category_name)
-    return render(request, "auctions/index.html", {
-        "listings": Listing.objects.filter(category=category),
-        "headline": category_name
-    })
+    return render(
+        request,
+        "auctions/index.html",
+        {
+            "listings": Listing.objects.filter(category=category),
+            "headline": category_name,
+        },
+    )
 
 
 def categories(request):
-    return render(request, "auctions/categories.html", {
-        "categories": Category.objects.all()
-    })
+    return render(
+        request, "auctions/categories.html", {"categories": Category.objects.all()}
+    )
 
 
-@login_required(login_url='/login')
+@login_required(login_url="/login")
 def comment(request):
     if request.method == "POST":
         listing_id = request.POST.get("listing_id")

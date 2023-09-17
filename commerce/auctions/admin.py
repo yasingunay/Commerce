@@ -1,12 +1,26 @@
 from django.contrib import admin
 from .models import User, Listing, Category, Bid, Comment
 
+
 class ListingAdmin(admin.ModelAdmin):
-    list_display = ("title", "description", "starting_bid", "current_bid", "category", "image_url", "creator", "created_date", "active", "watchlist", "bidder")
-    
+    list_display = (
+        "title",
+        "description",
+        "starting_bid",
+        "current_bid",
+        "category",
+        "image_url",
+        "creator",
+        "created_date",
+        "active",
+        "watchlist",
+        "bidder",
+    )
+
 
 class BidAdmin(admin.ModelAdmin):
     list_display = ("user", "listing", "amount", "timestamp")
+
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name",)

@@ -6,7 +6,7 @@ class User(AbstractUser):
     pass
     watchlist = models.ManyToManyField("Listing", blank=True, related_name="watchlist")
     bids = models.ManyToManyField("Listing", blank=True, related_name="bidder")
-    
+
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -16,8 +16,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-    
-    
+
 
 class Listing(models.Model):
     title = models.CharField(max_length=255)
@@ -29,11 +28,13 @@ class Listing(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
-    winner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="winner")
+    winner = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True, null=True, related_name="winner"
+    )
 
     def __str__(self):
         return self.title
-    
+
 
 class Bid(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -43,7 +44,7 @@ class Bid(models.Model):
 
     def __str__(self):
         return f"{self.user} bid ${self.amount} on {self.listing}"
-    
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
