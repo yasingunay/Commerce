@@ -76,6 +76,17 @@ button[type="submit"]:hover {
     overflow: hidden;
   }
 
+
+  .listing-image-container1 {
+    max-width: 450px; 
+    max-height: 300px;
+    position: relative;   
+    height: 300px;
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+
 .listing-image {
     width: 100%;
     overflow: hidden;
