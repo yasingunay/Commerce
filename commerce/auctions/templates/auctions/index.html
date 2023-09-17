@@ -24,7 +24,7 @@
                   {% if listing.image_url %}
                   <img class="listing-image" src="{{ listing.image_url }}" alt="{{ listing.title }}">
                   {% else %}
-                  <img class="listing-image" src="{% static 'auctions/images/No-Image-Placeholder.svg' %}" alt="{{ listing.title }}">
+                  <img class="listing-image" src="{% static 'auctions/images/noimage.png' %}" alt="{{ listing.title }}">
                   {% endif %}
                </div>
             </a>

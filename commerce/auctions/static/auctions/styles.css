@@ -76,10 +76,12 @@ button[type="submit"]:hover {
     display: flex; /* Use flexbox for centering */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
+    overflow: hidden;
   }
 
 .listing-image {
     width: 100%;
+    overflow: hidden;
     height: auto
   
 
