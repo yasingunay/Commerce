@@ -247,7 +247,7 @@ def category(request, category_name):
         request,
         "auctions/index.html",
         {
-            "listings": Listing.objects.filter(category=category),
+            "listings": Listing.objects.filter(category=category, active=True),
             "headline": category_name,
         },
     )

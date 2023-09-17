@@ -1,200 +1,211 @@
 body {
-    padding: 10px;
+	padding: 10px;
 }
 
 .listing-box {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 10px;
 }
 
 
-
 .max-width {
-    max-width: 100%;
-    height: auto; 
+	max-width: 100%;
+	height: auto;
 }
 
 
 .container {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .listing-box {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin-bottom: 20px;
+	border: 1px solid #ccc;
+	padding: 20px;
+	margin-bottom: 20px;
 }
 
 h3 {
-    color: #333;
+	color: #333;
 }
 
 .border-bottom {
-    border-bottom: 1px solid black;
+	border-bottom: 1px solid black;
 }
 
 p {
-    margin: 5px 0;
+	margin: 5px 0;
 }
 
 img.img-fluid {
-    max-width: 100%;
-    height: auto;
+	max-width: 100%;
+	height: auto;
 }
 
 form {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 
 button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
+	background-color: #007bff;
+	color: #fff;
+	padding: 5px 10px;
+	border: none;
+	cursor: pointer;
 }
 
 button[type="submit"]:hover {
-    background-color: #0056b3;
+	background-color: #0056b3;
 }
 
 .alert {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 
 .listing-image-container {
-    max-width: 450px; 
-    max-height: 300px;
-    position: relative;   
-    height: 300px;
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    overflow: hidden;
-  }
+	max-width: 450px;
+	max-height: 300px;
+	position: relative;
+	height: 300px;
+	display: flex;
+	/* Use flexbox for centering */
+	justify-content: center;
+	/* Center horizontally */
+	align-items: center;
+	/* Center vertically */
+	overflow: hidden;
+}
 
 
-  .listing-image-container1 {
-    max-width: 450px; 
-    max-height: 300px;
-    position: relative;   
-    height: 300px;
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-  }
+.listing-image-container1 {
+	max-width: 450px;
+	max-height: 300px;
+	position: relative;
+	height: 300px;
+	display: flex;
+	/* Use flexbox for centering */
+	justify-content: center;
+	/* Center horizontally */
+	align-items: center;
+	/* Center vertically */
+}
 
 .listing-image {
-    width: 100%;
-    overflow: hidden;
-    height: auto
-  
-
- }
-   
-
- #listing-details1{
-    margin-top: 10px;
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 450px;
- }
+	width: 100%;
+	overflow: hidden;
+	height: auto
+}
 
 
+#listing-details1 {
+	margin-top: 10px;
+	display: flex;
+	/* Use flexbox for centering */
+	justify-content: center;
+	/* Center horizontally */
+	align-items: center;
+	/* Center vertically */
+	height: 450px;
+}
 
 
 .background-container {
-    background-color: #f8f9fa; /* Light gray background color */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
- }
- 
- h3.text-center {
-    color: #333; /* Dark text color */
- }
- 
- .list-group-item {
-    background-color: transparent; /* Remove the default background color */
-    border: none; /* Remove the default border */
-    padding: 5px 0; /* Adjust vertical padding as needed */
- }
- 
- .list-group-item a {
-    text-decoration: none; /* Remove underlines from links */
-    color: #007bff; /* Blue link color */
-    transition: color 0.3s; /* Smooth color transition on hover */
- }
- 
- .list-group-item a:hover {
-    color: #0056b3; /* Darker blue color on hover */
- }
- 
+	background-color: #f8f9fa;
+	/* Light gray background color */
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	/* Add a subtle box shadow */
+}
 
+h3.text-center {
+	color: #333;
+	/* Dark text color */
+}
 
+.list-group-item {
+	background-color: transparent;
+	/* Remove the default background color */
+	border: none;
+	/* Remove the default border */
+	padding: 5px 0;
+	/* Adjust vertical padding as needed */
+}
 
+.list-group-item a {
+	text-decoration: none;
+	/* Remove underlines from links */
+	color: #007bff;
+	/* Blue link color */
+	transition: color 0.3s;
+	/* Smooth color transition on hover */
+}
+
+.list-group-item a:hover {
+	color: #0056b3;
+	/* Darker blue color on hover */
+}
 
 
 .required {
-    color: black
+	color: black
 }
 
 .required-note {
-    font-size: 14px;
-    color: #6c757d; /* Gray color for required note text */
+	font-size: 14px;
+	color: #6c757d;
+	/* Gray color for required note text */
 }
 
 .btn-primary {
-    background-color: #007bff; /* Primary button color */
-    border: none;
+	background-color: #007bff;
+	/* Primary button color */
+	border: none;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3; /* Darker blue color on hover */
+	background-color: #0056b3;
+	/* Darker blue color on hover */
 }
 
 .errorlist {
-    list-style-type: none;
-    padding: 0;
+	list-style-type: none;
+	padding: 0;
 }
 
 .errorlist li {
-    color: #dc3545; /* Red color for error messages */
+	color: #dc3545;
+	/* Red color for error messages */
 }
 
 
+.required1 {
 
-.required1{
-   
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        resize: vertical;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: vertical;
 
 }
-
 
 
 .description-container {
-    max-height: 200px; /* Adjust the height as needed */
-    overflow-y: auto;
+	max-height: 200px;
+	/* Adjust the height as needed */
+	overflow-y: auto;
 }
 
 
-
-
 .card {
-    height: 100%; 
-
-  
- }
+	height: 100%;
 
 
- #listing-box1 {
-    margin-bottom: 10px;
+}
+
+
+#listing-box1 {
+	margin-bottom: 10px;
 }
