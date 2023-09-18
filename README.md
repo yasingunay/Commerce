@@ -3,6 +3,13 @@ Design an eBay-like e-commerce auction site that will allow users to post auctio
 
 ### [VIDEO DEMO](https://youtu.be/RdSMb5JChOc)
 
+## Skills
+* Django
+* Python
+* SQL
+* Models
+* Migrations
+
 ## Active Listings
 ![index](screenshots/index.png)
 
