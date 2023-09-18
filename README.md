@@ -10,14 +10,16 @@ Design an eBay-like e-commerce auction site that will allow users to post auctio
 * Models
 * Migrations
 
-## Active Listings
+## Screenshots
+
+### Active Listings
 ![index](screenshots/index.png)
 
-## Listing page
+### Listing page
 ![listing](screenshots/listing.png)
 
-## Create a listing
+### Create a listing
 ![create](screenshots/create.png)
 
-## Caregories
+### Caregories
 ![categories](screenshots/categories.png)
